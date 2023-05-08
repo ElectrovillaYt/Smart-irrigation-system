@@ -15,7 +15,7 @@ void setup() {
   pinMode(automode, INPUT_PULLUP);
   pinMode(dry_sense, INPUT);
   pinMode(Out, OUTPUT);
-
+  Serial.begin(9600);
   lcd.begin();
   lcd.backlight();
 
@@ -59,6 +59,7 @@ void maunalswitch() {
   }
 }
 
+int Time = 0;
 
 int auto_state = 0;
 void automode_switch() {
@@ -71,13 +72,18 @@ void automode_switch() {
     lcd.setCursor(0, 1);
     lcd.print("Auto:");
     lcd.print("  ");
-
     if (M_value <= 20) {
-      state = 1;
-      digitalWrite(Out, 1);
-    } else {
-      state = 0;
-      digitalWrite(Out, 0);
+      Time = millis();
+      if ((Time >= 20000) && (digitalRead(dry_sense) == 1)) {
+        state = 1;
+        digitalWrite(Out, 1);
+        Time = 0;
+
+      } else if ((Time >= 20000) && (digitalRead(dry_sense) == 0)) {
+        state = 0;
+        digitalWrite(Out, 0);
+        Time = 0;
+      }
     }
   } else {
     lcd.setCursor(0, 1);
