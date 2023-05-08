@@ -8,7 +8,7 @@ manual switch at d2 is used to turn on/off pump manually.
 
 automode switch at d3 is used to turn on/off pump autpmatically when moisture level is low or normal.
 
-dry sense at d4 is to make sure that water is running else after 10 seond pump will automatically turns off (feature to be added)
+dry sense at d4 is to make sure that water is running else after 10 seond pump will automatically turns off (feature needs improvements)
 
 pump at d5
 
